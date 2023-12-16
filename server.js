@@ -30,10 +30,14 @@ app.get('/games', async (req, res, next) => {
 })
 
 app.get('/games/:game_id', async (req, res, next) => {
-    const game_id = req.params.game_id;
+    const game_id = parseInt(req.params.game_id);
     try {
         const result = await pool.query('SELECT * FROM games WHERE game_id = $1', [game_id]);
-        res.status(200).json(result.rows);
+        if(result.rows.length === 0){
+            return res.status(404).send('Unable to locate resource.')
+         } else {
+             res.status(200).json(result.rows)
+         }
     }catch(error){
         res.status(404).send('Resource not found')
         next(error);
@@ -53,9 +57,13 @@ app.post('/games', async (req, res, next) => {
 })
 
 app.patch('/games/:game_id', async (req, res, next)=>{
-    const game_id = req.params.game_id;
+    const game_id = parseInt(req.params.game_id);
     const { date, pgn, fen, winner } = req.body;
     try {
+        const game = await pool.query('SELECT * FROM donuts WHERE id = $1', [game_id])
+        if (game.rows.length === 0){
+            return res.status(404).send('Unable to locate resource.')
+        }
         const result = await pool.query('UPDATE games SET date = $1, pgn = $2, fen = $3, winner = $4 WHERE game_id = $5 RETURNING *',
         [ date, pgn, fen, winner, game_id]);
         res.status(201).json(result.rows)
@@ -66,14 +74,16 @@ app.patch('/games/:game_id', async (req, res, next)=>{
 })
 
 app.delete('/games/:game_id', async (req, res, next) => {
-    const game_id = req.params.game_id;
+    const game_id = parseInt(req.params.game_id);
     try {
-        const result = await pool.query('DELETE FROM games WHERE game_id = $1', [game_id]);
-        res.json(result.rows);
-        res.status(204)
+        const result = await pool.query('DELETE FROM games WHERE game_id = $1 RETURNING *', [game_id]);
+        if (result.rows.length === 0){
+            res.status(404).send('Unable to locate resource.')
+        } else{
+            res.status(200).json(result.rows)
+        }
     }catch(error){
-        res.status(404).send('Resource Not Found');
-        next(error);
+        next(error)
     }
 })
 
