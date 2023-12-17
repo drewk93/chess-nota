@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Games from './Games'
 
-const Library = () => {
+const Library = ({toggleGameDisplay}) => {
     const [games, setGames] = useState([]);
 
     const domain = 'http://localhost:3000';
@@ -22,11 +22,13 @@ const Library = () => {
         fetchLibrary();
     }, []);
 
+
+
     return (
         <div id="library-container">
             <div id="library-display">
                 {games.map((game) => (
-                    <Games key={game.game_id} game={game} />
+                    <Games key={game.game_id} game={game} toggleGameDisplay={toggleGameDisplay} />
                 ))}
             </div>
         </div>
@@ -34,12 +36,3 @@ const Library = () => {
 };
 
 export default Library;
-
-// const Posts = ({posts, getSinglePost}) => {
-//     return posts.map((post) => (
-//         <PostItem post={post}
-//          key={post.id}
-//          getSinglePost={getSinglePost}
-//          />
-//     ))
-// }
