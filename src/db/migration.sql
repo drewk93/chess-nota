@@ -7,3 +7,4 @@ CREATE TABLE games (
     fen JSON,
     winner VARCHAR(5)
 );
+
