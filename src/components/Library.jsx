@@ -22,13 +22,25 @@ const Library = ({toggleGameDisplay}) => {
         fetchLibrary();
     }, []);
 
+    const deleteGame = async (game_id) => {
+        try {
+          await axios.delete(`${domain}/games/${game_id}`);
+          // Filter out the deleted game from the current state
+          const updatedGames = games.filter((game) => game.game_id !== game_id);
+          setGames(updatedGames);
+        } catch (error) {
+          console.error('Error deleting game:', error);
+        }
+      };
+    
+
 
 
     return (
         <div id="library-container">
             <div id="library-display">
                 {games.map((game) => (
-                    <Games key={game.game_id} game={game} toggleGameDisplay={toggleGameDisplay} />
+                    <Games key={game.game_id} game={game} toggleGameDisplay={toggleGameDisplay} deleteGame={deleteGame} />
                 ))}
             </div>
         </div>
