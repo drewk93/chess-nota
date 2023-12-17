@@ -4,6 +4,7 @@ import './App.css'
 import Taskbar from './components/Taskbar'
 import Home from './components/Home';
 import Input from './components/Input';
+import Library from './components/Library'
 
 function App() {
   const [displayInput, setDisplayInput] = useState(false);
@@ -19,12 +20,19 @@ function App() {
     setDisplayLibrary(false);
   };
 
+  const toggleLibraryDisplay = () => {
+    setDisplayLibrary(true);
+    setDisplayInput(false);
+  }
+
   
 
   return (
     <div id={"app"}>
-      <Taskbar toggleHomeDisplay={toggleHomeDisplay} toggleInputDisplay={toggleInputDisplay} />
-      {displayInput ? <Input /> : <Home />}
+      <Taskbar toggleHomeDisplay={toggleHomeDisplay} toggleInputDisplay={toggleInputDisplay} toggleLibraryDisplay={toggleLibraryDisplay} />
+      {!displayInput && !displayLibrary && <Home />}
+      {displayInput && <Input />}
+      {displayLibrary && <Library />}
     </div>
   )
 }

@@ -1,7 +1,7 @@
 import TaskbarBtn from './TaskbarBtn'
 
 
-const Taskbar = ({toggleHomeDisplay, toggleInputDisplay}) => {
+const Taskbar = ({toggleHomeDisplay, toggleInputDisplay, toggleLibraryDisplay}) => {
 
     const handleHomeClick = () => {
         toggleHomeDisplay()
@@ -12,7 +12,7 @@ const Taskbar = ({toggleHomeDisplay, toggleInputDisplay}) => {
     }
 
     const handleLibraryClick = () => {
-        console.log("Library button clicked")
+        toggleLibraryDisplay();
     }
 
     return(
