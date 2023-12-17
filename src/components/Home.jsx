@@ -14,7 +14,7 @@ const Home = () => {
       const interval = setInterval(() => {
         // Update the image index to rotate through the array
         setCurrentImageIndex((prevIndex) => (prevIndex + 1) % imageList.length);
-      }, 3000); // 4 seconds interval
+      }, 2500); // 4 seconds interval
   
       return () => clearInterval(interval); // Clean up the interval on component unmount
     }, []); // Run this effect only once on initial render

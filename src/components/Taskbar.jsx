@@ -1,7 +1,11 @@
 import TaskbarBtn from './TaskbarBtn'
 
 
-const Taskbar = ({toggleInputDisplay}) => {
+const Taskbar = ({toggleHomeDisplay, toggleInputDisplay}) => {
+
+    const handleHomeClick = () => {
+        toggleHomeDisplay()
+    }
 
     const handleGameClick = () => {
         toggleInputDisplay()
@@ -13,8 +17,9 @@ const Taskbar = ({toggleInputDisplay}) => {
 
     return(
         <div id="taskbar">
+            {/* <h1 id="taskbar-title"> CHESS NOTA </h1> */}
+            <TaskbarBtn buttonText={"Home"} onClickHandler={handleHomeClick}/>
             <TaskbarBtn buttonText={"Submit Games"} onClickHandler={handleGameClick}/>
-            <h1 id="taskbar-title"> CHESS NOTA </h1>
             <TaskbarBtn buttonText={"Library"} onClickHandler={handleLibraryClick}/>
         </div>
     )

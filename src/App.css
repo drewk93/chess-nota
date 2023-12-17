@@ -24,10 +24,13 @@
 }
 
 #taskbar {
+  box-sizing: border-box;
+  padding-left: 15em;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-around;
+  justify-content:flex-start;
+  gap: 2em;
   background-color: var(--dark);
   width: 100%;
   height: 15%;
@@ -48,7 +51,7 @@
 .taskbar-btn {
   height: 8em;
   width: 14em;
-  background-color: var(--mid-dark);
+  background-image: linear-gradient(to bottom, var(--mid-dark), var(--mid));
   color: var(--white);
   border: thin solid var(--white);
   border-radius: 30px;
@@ -56,7 +59,7 @@
 }
 
 .taskbar-btn:hover{
-  background-color: var(--white);
+  background-image: var(--white);
   color: var(--dark);
   transform: scale(1.4);
 }
@@ -117,10 +120,7 @@
   background-color: var(--mid-dark);
   color: var(--white);
   transition: transform 0.5s ease;
-}
-
-#submit-btn{
-  margin-left: auto;
+  padding: 0.3em;
 }
 
 .input-btn:hover{
@@ -130,11 +130,23 @@
   
 }
 
+#submit-btn{
+  margin-left: auto;
+}
 
 #fenContainer {
   display: flex;
+  flex-direction: column;
   background-color: var(--white);
   width: 100%;
   height: 70%;
   border: 4px solid var(--dark);
+  font-size: larger;
+  font-weight: bold;
+  gap: 1em;
+  overflow-y: auto;
+}
+
+#fenItem{
+  background-color: #3333;
 }

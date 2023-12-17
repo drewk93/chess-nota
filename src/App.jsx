@@ -9,15 +9,21 @@ function App() {
   const [displayInput, setDisplayInput] = useState(false);
   const [displayLibrary, setDisplayLibrary] = useState(false);
 
+  const toggleHomeDisplay = () => {
+    setDisplayInput(false);
+    setDisplayLibrary(false);
+  }
+
   const toggleInputDisplay = () => {
     setDisplayInput(true);
+    setDisplayLibrary(false);
   };
 
   
 
   return (
     <div id={"app"}>
-      <Taskbar toggleInputDisplay={toggleInputDisplay} />
+      <Taskbar toggleHomeDisplay={toggleHomeDisplay} toggleInputDisplay={toggleInputDisplay} />
       {displayInput ? <Input /> : <Home />}
     </div>
   )

@@ -11,14 +11,21 @@ const Input = () => {
     const pgnChange = (event) => {
         setPgnInput(event.target.value);
     };
-
+    
     const convertToFEN = () => {
         const chess = new Chess();
-        chess.loadPgn(pgnInput)
-        console.log(chess.fen())
-    }
+        const moves = pgnInput.split(/\d+\./).filter(Boolean).map(move => move.trim()); // Splitting moves
+        const separatedMoves = moves.flatMap(move => move.split(/\s+/)); // Splitting moves by spaces
+        const fenPositions = {};
     
-
+        separatedMoves.forEach((move, index) => {
+            chess.move(move);
+            fenPositions[`${index + 1}`] = chess.fen();
+        });
+    
+        setFenInput(fenPositions); // Update the state with FEN positions
+        console.log(fenInput)
+    };
 
     return (
         <div id="input-container">
@@ -37,10 +44,13 @@ const Input = () => {
                     <option value="white">White</option>
                     <option value="draw">Draw</option>
                 </select>
-                <button id="submit-btn" className="input-btn" onClick={convertToFEN}> SUBMIT</button>
-                <button id="post-btn" className="input-btn"> POST </button>
+                <button id="submit-btn" className="input-btn" onClick={convertToFEN}> CONVERT TO FEN</button>
+                <button id="post-btn" className="input-btn"> POST TO LIBRARY </button>
             </div>
             <div id="fenContainer">
+            {Object.entries(fenInput).map(([move, fenString]) => (
+                <p key={move} id="fenItem">{`${move}: ${fenString}`}</p>
+            ))}
             </div>
         </div>
     )
