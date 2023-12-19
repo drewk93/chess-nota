@@ -35,12 +35,14 @@ const Game = ({ game_id, toggleInputDisplay}) => {
                 <h2>Game ID: {game.game_id}</h2>
                 <h2>Date: {formattedDate} </h2>
                 <h2>Winner: {game.winner ? game.winner.toUpperCase() : ''}</h2>
-                <button className="list-btn" onClick={handleInputDisplay}>EDIT</button>
+                <button className="list-btn" onClick={handleInputDisplay}>EDIT GAME</button>
                 
             </div>
+            <h1>PGN </h1>
             <div id="pgn-display">
                 <p>{game.pgn}</p>
             </div>
+            <h1>FEN</h1>
             <div id="fen-display">
                 {Object.keys(fen).map((key, index) => (
                     <p key={key} id="fenItem"><b> Move {index + 1}:</b> {fen[key]}</p>
