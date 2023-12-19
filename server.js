@@ -56,22 +56,26 @@ app.post('/games', async (req, res, next) => {
     }
 })
 
-app.patch('/games/:game_id', async (req, res, next)=>{
+app.patch('/games/:game_id', async (req, res, next) => {
     const game_id = parseInt(req.params.game_id);
     const { date, pgn, fen, winner } = req.body;
+    
     try {
-        const game = await pool.query('SELECT * FROM donuts WHERE id = $1', [game_id])
-        if (game.rows.length === 0){
-            return res.status(404).send('Unable to locate resource.')
+        const game = await pool.query('SELECT * FROM games WHERE game_id = $1', [game_id]);
+        
+        if (game.rows.length === 0) {
+            return res.status(404).send('Unable to locate resource.');
         }
+        
         const result = await pool.query('UPDATE games SET date = $1, pgn = $2, fen = $3, winner = $4 WHERE game_id = $5 RETURNING *',
-        [ date, pgn, fen, winner, game_id]);
-        res.status(201).json(result.rows)
-    }catch(error){
-        res.status(404).send('Resource not found');
+            [date, pgn, fen, winner, game_id]);
+        
+        res.status(200).json(result.rows); // Assuming successful update, sending updated data
+    } catch (error) {
+        res.status(500).send('Error updating resource.');
         next(error);
     }
-})
+});
 
 app.delete('/games/:game_id', async (req, res, next) => {
     const game_id = parseInt(req.params.game_id);

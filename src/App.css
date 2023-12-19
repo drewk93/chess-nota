@@ -165,7 +165,7 @@
 
 
 #fenItem{
-  background-color: var(--mid-dark);
+  background-image: linear-gradient(to bottom, var(--dark),  var(--mid-dark));
   height: 2em;
   padding: 0.5em;
   margin: 0;
@@ -274,5 +274,16 @@
   background-color: var(--mid);
   height: 40%;
   width: 90%;
+  padding: 1em;
+  gap: 1em;
   overflow-y: scroll;
 }
+
+/* #game{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-image: linear-gradient(to bottom, var(--dark),  var(--mid-dark));
+  color: white;
+  height: 3em;
+} */

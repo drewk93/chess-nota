@@ -2,13 +2,33 @@ import {useState, useEffect} from 'react';
 import { Chess } from 'chess.js';
 import axios from 'axios';
 
-const Input = () => {
-
+const Input = ({game_id}) => {
+    const [isPatch, setIsPatch] = useState(false);
     const [pgnInput, setPgnInput] = useState('');
     const [dateInput, setDateInput] = useState('');
     const [winnerInput, setWinnerInput] = useState('')
     const [fenInput, setFenInput] = useState({});
     const [statusMessage, setStatusMessage] = useState('')
+
+    useEffect(() => {
+        // Fetch the game details when game_id changes
+        if (game_id) {
+            const domain = 'http://localhost:3000';
+            axios.get(`${domain}/games/${game_id}`)
+                .then((response) => {
+                    const { pgn, date, winner, fen } = response.data[0];
+                    setPgnInput(pgn || '');
+                    setDateInput(date || '');
+                    setWinnerInput(winner || '');
+                    setFenInput(fen || {});
+                    setIsPatch(true);
+                })
+                .catch((error) => {
+                    console.error('Error fetching game details:', error);
+                });
+        }
+    }, [game_id]);
+
 
     const pgnChange = (event) => {
         setPgnInput(event.target.value);
@@ -49,24 +69,42 @@ const Input = () => {
         console.log(winnerInput);
     
         const domain = "http://localhost:3000";
-        // Assuming you want to send the entire fenInput object
-        axios.post(`${domain}/games`, {
+        const postData = {
             date: dateInput,
             pgn: pgnInput,
-            fen: fenInput, // Entire fenInput object
+            fen: fenInput,
             winner: winnerInput
-        })
-        .then(response => {
-            console.log(response.data);
-            setStatusMessage('Posted Successfully'); // Set status message on successful post
-            setTimeout(() => {
-                setStatusMessage(''); // Reset status message after 2.5 seconds
-            }, 2500);
-        })
-        .catch(error => {
-            console.error('Error:', error.response.data.message);
-            setStatusMessage('Error Posting Game')
-        });
+        };
+    
+        if (isPatch) {
+            // Perform a PATCH request if isPatch is true
+            axios.patch(`${domain}/games/${game_id}`, postData)
+                .then(response => {
+                    console.log(response.data);
+                    setStatusMessage('Patched Successfully');
+                    setTimeout(() => {
+                        setStatusMessage('');
+                    }, 2500);
+                })
+                .catch(error => {
+                    console.error('Error:', error.response.data.message);
+                    setStatusMessage('Error Patching Game');
+                });
+        } else {
+            // Perform a POST request if isPatch is false
+            axios.post(`${domain}/games`, postData)
+                .then(response => {
+                    console.log(response.data);
+                    setStatusMessage('Posted Successfully');
+                    setTimeout(() => {
+                        setStatusMessage('');
+                    }, 2500);
+                })
+                .catch(error => {
+                    console.error('Error:', error.response.data.message);
+                    setStatusMessage('Error Posting Game');
+                });
+        }
     };
 
     return (
@@ -77,9 +115,9 @@ const Input = () => {
                 <input type="text" id="pgn-input" className="input-field" placeholder="pgn moves" value={pgnInput} onChange={pgnChange} />
             </div>
             <div id="date-winner-container">
-                <label htmlFor="dateInput" className="input-label"><span class="required-field">*</span>Date:</label>
+                <label htmlFor="dateInput" className="input-label"><span className="required-field">*</span>Date:</label>
                 <input type="text" id="dateInput" className="input-field" placeholder="yyyy/mm/dd" value={dateInput} onChange={dateChange}/>
-                <label htmlFor="winner" className="input-label"><span class="required-field">*</span>Winning Color:</label>
+                <label htmlFor="winner" className="input-label"><span className="required-field">*</span>Winning Color:</label>
                 <select id="winner" className="input-field" value={winnerInput} onChange={winnerChange}>
                     <option value="">Select</option>
                     <option value="black">Black</option>

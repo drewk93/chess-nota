@@ -19,7 +19,8 @@ function App() {
     setDisplayGame(false);
   };
 
-  const toggleInputDisplay = () => {
+  const toggleInputDisplay = (game_id) => {
+    setGameId(game_id)
     setDisplayInput(true);
     setDisplayLibrary(false);
     setDisplayGame(false);
@@ -45,9 +46,9 @@ function App() {
         toggleLibraryDisplay={toggleLibraryDisplay}
       />
       {!displayInput && !displayLibrary && !displayGame && <Home />}
-      {displayInput && <Input />}
+      {displayInput && <Input game_id={game_id}/>}
       {displayLibrary && <Library toggleGameDisplay={toggleGameDisplay}/>}
-      {displayGame && <Game game_id={game_id} />}
+      {displayGame && <Game game_id={game_id} toggleInputDisplay={toggleInputDisplay}/>}
     </div>
   );
 }
