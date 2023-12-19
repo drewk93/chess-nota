@@ -15,7 +15,7 @@ const Game = ({ game_id, toggleInputDisplay}) => {
     useEffect(() => {
         const fetchLibrary = async () => {
             try {
-                const res = await axios.get(`${domain}/games/${game_id}`);
+                const res = await axios.get(`${domain}games/${game_id}`);
                 setGame(res.data[0]);
                 const date = new Date(res.data[0].date);
                 const formattedDate = date.toISOString().split('T')[0];
