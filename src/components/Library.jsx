@@ -10,7 +10,7 @@ const Library = ({toggleGameDisplay}) => {
     useEffect(() => {
         const fetchLibrary = async () => {
             try {
-                const res = await axios.get(`${domain}games`);
+                const res = await axios.get(`${domain}/games`);
                 setGames(res.data);
                 console.log(res.data)
             } catch (error) {
