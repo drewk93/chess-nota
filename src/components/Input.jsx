@@ -13,7 +13,7 @@ const Input = ({game_id}) => {
     useEffect(() => {
         // Fetch the game details when game_id changes
         if (game_id) {
-            const domain = 'http://localhost:3000';
+            const domain = 'https://chess-nota.onrender.com/';
             axios.get(`${domain}/games/${game_id}`)
                 .then((response) => {
                     const { pgn, date, winner, fen } = response.data[0];
@@ -68,7 +68,7 @@ const Input = ({game_id}) => {
         console.log(dateInput);
         console.log(winnerInput);
     
-        const domain = "http://localhost:3000";
+        const domain = "https://chess-nota.onrender.com/";
         const postData = {
             date: dateInput,
             pgn: pgnInput,

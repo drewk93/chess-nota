@@ -10,7 +10,7 @@ const Game = ({ game_id, toggleInputDisplay}) => {
         toggleInputDisplay(game.game_id)
     }
 
-    const domain = 'http://localhost:3000';
+    const domain = 'https://chess-nota.onrender.com/';
 
     useEffect(() => {
         const fetchLibrary = async () => {

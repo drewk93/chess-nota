@@ -5,7 +5,7 @@ import Games from './Games'
 const Library = ({toggleGameDisplay}) => {
     const [games, setGames] = useState([]);
 
-    const domain = 'http://localhost:3000';
+    const domain = 'https://chess-nota.onrender.com/';
 
     useEffect(() => {
         const fetchLibrary = async () => {
