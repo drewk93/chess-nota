@@ -38,6 +38,7 @@ const Library = ({toggleGameDisplay}) => {
 
     return (
         <div id="library-container">
+            <h1 id="library-header">GAME LIBRARY</h1>
             <div id="library-display">
                 {games.map((game) => (
                     <Games key={game.game_id} game={game} toggleGameDisplay={toggleGameDisplay} deleteGame={deleteGame} />

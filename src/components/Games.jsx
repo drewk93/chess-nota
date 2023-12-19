@@ -17,7 +17,7 @@ const Games = ({game, toggleGameDisplay, deleteGame}) => {
         <h2 id="game" className="game-info" >
             <button id="select-btn" className="list-btn" onClick={handleSelectGame}>SELECT</button>
             <span id="date">Date: {formattedDate}</span>
-            <span id="winner">Winner: {game.winner}</span>
+            <span id="winner">Winner: {game.winner ? game.winner.toUpperCase() : ''}</span>
             <button id="delete-btn" className="list-btn" onClick={handleDeleteGame}> DELETE </button>
         </h2>
     );
