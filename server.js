@@ -97,7 +97,7 @@ app.use((error, rew, res, next) => {
     res.status(error.status || 500).json({error: error.message})
 });
 
-const PORT = process.env.PORT || 5432
+const PORT = process.env.PORT || 10000
 app.listen(PORT, (req, res) => {
     console.log(`Listening on PORT: ${PORT}`)
 })
