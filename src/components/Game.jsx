@@ -35,7 +35,7 @@ const Game = ({ game_id, toggleInputDisplay}) => {
                 <h2>Game ID: {game.game_id}</h2>
                 <h2>Date: {formattedDate} </h2>
                 <h2>Winner: {game.winner ? game.winner.toUpperCase() : ''}</h2>
-                <button className="list-btn" onClick={handleInputDisplay}>EDIT GAME</button>
+                <button className="list-btn" id="edit-btn" onClick={handleInputDisplay}>EDIT GAME</button>
                 
             </div>
             <h1>PGN </h1>
