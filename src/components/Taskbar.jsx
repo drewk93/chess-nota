@@ -17,8 +17,11 @@ const Taskbar = ({toggleHomeDisplay, toggleInputDisplay, toggleLibraryDisplay}) 
 
     return(
         <div id="taskbar">
-
-            <h1> CHESS N<img src={chessKnightImage} alt="Icon" />TA</h1>
+            <div className="taskbar-title"> {/* Fixed: className */}
+                <h1> CHESS N<img src={chessKnightImage} alt="Icon" />TA</h1>
+                <p id="chess-js"><em>Powered by</em> <b>Chess.JS</b></p>
+            </div>
+            
             <TaskbarBtn buttonText={"Home"} onClickHandler={handleHomeClick}/>
             <TaskbarBtn buttonText={"PGN to FEN"} onClickHandler={handleGameClick}/>
             <TaskbarBtn buttonText={"Library"} onClickHandler={handleLibraryClick}/>

@@ -52,14 +52,16 @@
   background-image: linear-gradient(to bottom,var(--dark), var(--mid-dark), var(--mid));
   color: var(--white);
   border: thin solid var(--mid-dark);
-  border-radius: 0 0 60px 10px;
-  transition: transform 0.5s ease;
+  border-radius: 0 0 80px 20px;
+  transition: transform 1s ease, border-radius 0.7s ease;
 }
 
 .taskbar-btn:hover{
   background: white;
   color: var(--mid);
-  transform: scale(1.3);
+  transform: scale(1.4);
+  border-radius: 0 0 20px 20px;
+  cursor: pointer;
 }
 
 #input-container {
@@ -69,12 +71,16 @@
   background-color: var(--dark);
   color: white;
   border: 2px solid var(--mid);
-  border-radius: 40px;
+  border-radius: 20px;
   height: 85%;
   width:80%;
   margin-bottom: 2em;
   padding: 4em;
   gap: 2em;
+}
+
+#chess-js{
+  font-size: 0.5em;
 }
 
 #input-header{
@@ -181,7 +187,7 @@
   background-color: var(--dark);
   color: white;
   border: 2px solid var(--mid);
-  border-radius: 40px;
+  border-radius: 20px;
   height: 85%;
   width:80%;
   margin-bottom: 2em;
@@ -248,7 +254,7 @@
   background-color: var(--dark);
   color: white;
   border: 2px solid var(--mid);
-  border-radius: 40px;
+  border-radius: 20px;
   height: 85%;
   width:80%;
   margin-bottom: 2em;

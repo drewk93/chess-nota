@@ -26,3 +26,4 @@ dist-ssr
 .env
 ./.env
 chess_nota.session.sql
+chess_nota_external.session.sql
