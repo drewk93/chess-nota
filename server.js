@@ -18,6 +18,12 @@ const pool = new Pool({
     connectionString: process.env.DATABASE_URL
 });
 
+app.use(express.static(__dirname))
+
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/index.html');
+  });
+
 app.get('/games', async (req, res, next) => {
     
     try {
@@ -28,6 +34,7 @@ app.get('/games', async (req, res, next) => {
         next(error);
     }
 })
+
 
 app.get('/games/:game_id', async (req, res, next) => {
     const game_id = parseInt(req.params.game_id);
