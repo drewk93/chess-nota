@@ -67,8 +67,7 @@ const Input = ({game_id}) => {
     const postToLibrary = () => {
         console.log(dateInput);
         console.log(winnerInput);
-    
-        const domain = "https://chess-nota.onrender.com";
+        const domain = 'https://chess-nota.onrender.com';
         const postData = {
             date: dateInput,
             pgn: pgnInput,

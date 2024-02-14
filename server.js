@@ -18,7 +18,7 @@ const pool = new Pool({
     connectionString: process.env.DATABASE_URL
 });
 
-app.use(express.static(__dirname))
+// app.use(express.static(__dirname))
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html');
